@@ -1,0 +1,10 @@
+services:
+    portfolio-web:
+        # Docker sẽ tự tìm biến trong file .env nằm cùng thư mục
+        image: ${DOCKER_USERNAME}/my-portfolio:${IMAGE_TAG}
+        container_name: my-portfolio
+        ports:
+            - "8080:80"
+        env_file:
+            - .env
+        restart: always
