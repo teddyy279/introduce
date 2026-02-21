@@ -1,78 +1,78 @@
 name: CI/CD Pipeline Portfolio
 
 on:
-  push:
-    branches: ["main"]
+    push:
+        branches: ["main"]
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    build-and-push:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/my-portfolio:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/my-portfolio:latest
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v5
+              with:
+                  context: .
+                  push: true
+                  tags: |
+                      ${{ secrets.DOCKER_USERNAME }}/my-portfolio:${{ github.sha }}
+                      ${{ secrets.DOCKER_USERNAME }}/my-portfolio:latest
 
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    deploy:
+        needs: build-and-push
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      # 1. Chuẩn bị thư mục đích trên server
-      - name: Prepare Target Directory
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            sudo mkdir -p /var/www/profile
-            sudo chown -R ${{ secrets.SERVER_USER }}:${{ secrets.SERVER_USER }} /var/www/profile
+            # 1. Chuẩn bị thư mục đích trên server
+            - name: Prepare Target Directory
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SERVER_IP }}
+                  username: ${{ secrets.SERVER_USER }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  script: |
+                      sudo mkdir -p /var/www/profile
+                      sudo chown -R ${{ secrets.SERVER_USER }}:${{ secrets.SERVER_USER }} /var/www/profile
 
-      # 2. Đưa file docker-compose.yml từ repo lên thư mục /var/www/profile
-      - name: Copy docker-compose via SCP
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker-compose.yml"
-          target: "/var/www/profile"
+            # 2. Đưa file docker-compose.yml từ repo lên thư mục /var/www/profile
+            - name: Copy docker-compose via SCP
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{ secrets.SERVER_IP }}
+                  username: ${{ secrets.SERVER_USER }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  source: "docker-compose.yml"
+                  target: "/var/www/profile"
 
-      # 3. Tạo file .env và khởi chạy container ngay tại thư mục profile
-      - name: Create .env and Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/profile
-            
-            # Tạo file .env chứa các biến cần thiết ngay tại đây
-            cat <<EOF > .env
-            DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
-            IMAGE_TAG=${{ github.sha }}
-            EOF
-            
-            # Kiểm tra xem các file đã nằm đúng chỗ chưa
-            ls -la
-            
-            # Pull image mới dựa trên tag SHA và restart
-            docker compose pull
-            docker compose up -d
+            # 3. Tạo file .env và khởi chạy container ngay tại thư mục profile
+            - name: Create .env and Deploy
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SERVER_IP }}
+                  username: ${{ secrets.SERVER_USER }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  script: |
+                      cd /var/www/profile
+
+                      # Tạo file .env chứa các biến cần thiết ngay tại đây
+                      cat <<EOF > .env
+                      DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+                      IMAGE_TAG=${{ github.sha }}
+                      EOF
+
+                      # Kiểm tra xem các file đã nằm đúng chỗ chưa
+                      ls -la
+
+                      # Pull image mới dựa trên tag SHA và restart
+                      sudo docker compose pull
+                      sudo docker compose up -d
