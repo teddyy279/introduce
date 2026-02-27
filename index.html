@@ -3,303 +3,175 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Wanderlust - Khám Phá Thế Giới</title>
+        <title>Giao diện Hiện đại - Gemini Design</title>
+        <script src="https://cdn.tailwindcss.com"></script>
         <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
         <style>
-            /* --- THIẾT LẬP CHUNG (CSS Variables & Reset) --- */
-            :root {
-                --primary-color: #2a9d8f; /* Màu xanh ngọc chủ đạo */
-                --secondary-color: #e9c46a; /* Màu vàng cát điểm nhấn */
-                --dark-text: #264653; /* Màu chữ tối */
-                --light-text: #f1faee; /* Màu chữ sáng */
-                --bg-light: #f8f9fa; /* Màu nền sáng */
-                --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
-            }
-
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
             body {
-                font-family: "Poppins", sans-serif;
-                line-height: 1.6;
-                color: var(--dark-text);
-                background-color: var(--bg-light);
+                font-family: "Inter", sans-serif;
             }
-
-            /* --- CÁC THÀNH PHẦN DÙNG CHUNG --- */
-            .container {
-                width: 90%;
-                max-width: 1200px;
-                margin: 0 auto; /* Căn giữa trang */
-            }
-
-            h1,
-            h2,
-            h3 {
-                font-weight: 700;
-                line-height: 1.2;
-            }
-
-            .btn {
-                display: inline-block;
-                padding: 12px 30px;
-                background-color: var(--primary-color);
-                color: white;
-                text-decoration: none;
-                border-radius: 50px;
-                font-weight: 600;
-                transition: all 0.3s ease;
-                border: none;
-                cursor: pointer;
-            }
-
-            .btn:hover {
-                background-color: #21867a;
-                transform: translateY(-3px);
-                box-shadow: 0 5px 15px rgba(42, 157, 143, 0.4);
-            }
-
-            /* --- HEADER / HERO SECTION --- */
-            .hero {
-                height: 90vh; /* Chiều cao bằng 90% màn hình */
-                /* Sử dụng ảnh mẫu từ Unsplash */
-                background-image:
-                    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-                    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80");
-                background-size: cover;
-                background-position: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                color: var(--light-text);
-            }
-
-            .hero-content h1 {
-                font-size: 3.5rem;
-                margin-bottom: 20px;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            }
-
-            .hero-content p {
-                font-size: 1.2rem;
-                margin-bottom: 30px;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            /* --- PHẦN GIỚI THIỆU --- */
-            .intro {
-                text-align: center;
-                padding: 80px 0;
-            }
-
-            .intro h2 {
-                font-size: 2.5rem;
-                margin-bottom: 20px;
-                color: var(--primary-color);
-            }
-
-            .intro p {
-                font-size: 1.1rem;
-                max-width: 700px;
-                margin: 0 auto;
-                color: #666;
-            }
-
-            /* --- PHẦN ĐỊA ĐIỂM NỔI BẬT (GRID SYSTEM) --- */
-            .destinations {
-                padding-bottom: 80px;
-            }
-
-            .grid-container {
-                display: grid;
-                grid-template-columns: repeat(
-                    auto-fit,
-                    minmax(300px, 1fr)
-                ); /* Tự động chia cột */
-                gap: 30px;
-            }
-
-            .card {
-                background: white;
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: var(--box-shadow);
-                transition: transform 0.3s ease;
-            }
-
-            .card:hover {
-                transform: translateY(
-                    -10px
-                ); /* Hiệu ứng nổi lên khi di chuột */
-            }
-
-            .card-img {
-                height: 250px;
-                width: 100%;
-                object-fit: cover;
-            }
-
-            .card-content {
-                padding: 25px;
-            }
-
-            .card-tag {
-                background-color: var(--secondary-color);
-                color: var(--dark-text);
-                font-size: 0.8rem;
-                font-weight: 600;
-                padding: 5px 10px;
-                border-radius: 20px;
-                display: inline-block;
-                margin-bottom: 15px;
-            }
-
-            .card h3 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-
-            .card p {
-                color: #666;
-                margin-bottom: 20px;
-            }
-
-            .card-link {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-weight: 600;
-            }
-
-            .card-link:hover {
-                text-decoration: underline;
-            }
-
-            /* --- FOOTER --- */
-            footer {
-                background-color: var(--dark-text);
-                color: var(--light-text);
-                text-align: center;
-                padding: 40px 0;
-                margin-top: auto;
-            }
-
-            footer p {
-                opacity: 0.8;
-            }
-
-            /* --- RESPONSIVE (Cho điện thoại) --- */
-            @media (max-width: 768px) {
-                .hero-content h1 {
-                    font-size: 2.5rem;
-                }
-                .hero-content p {
-                    font-size: 1rem;
-                    padding: 0 20px;
-                }
-                .intro h2 {
-                    font-size: 2rem;
-                }
+            .glass {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
             }
         </style>
     </head>
-    <body>
-        <header class="hero">
-            <div class="hero-content container">
-                <h1>Lắng Nghe Tiếng Gọi Thiên Nhiên</h1>
-                <p>
-                    Rời xa khói bụi thành phố, hãy cùng chúng tôi khám phá những
-                    miền đất hứa, nơi vẻ đẹp hoang sơ đang chờ đón bạn.
-                </p>
-                <a href="#destinations" class="btn">Bắt Đầu Hành Trình</a>
+    <body class="bg-slate-50 text-slate-900">
+        <nav
+            class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto"
+        >
+            <div
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+            >
+                GEMINI.UI
             </div>
-        </header>
+            <div class="hidden md:flex space-x-8 font-medium text-slate-600">
+                <a href="#" class="hover:text-indigo-600 transition"
+                    >Trang chủ</a
+                >
+                <a href="#" class="hover:text-indigo-600 transition"
+                    >Tính năng</a
+                >
+                <a href="#" class="hover:text-indigo-600 transition"
+                    >Bảng giá</a
+                >
+            </div>
+            <button
+                class="bg-indigo-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
+            >
+                Bắt đầu ngay
+            </button>
+        </nav>
 
-        <main>
-            <section class="intro container">
-                <h2>Chuyến đi của sự Tự Do</h2>
-                <p>
-                    Chúng tôi tin rằng du lịch không chỉ là việc di chuyển, mà
-                    là cách chúng ta kết nối lại với chính mình và thế giới xung
-                    quanh. Hãy đi để thấy thế giới rộng lớn nhường nào.
-                </p>
-            </section>
+        <section
+            class="relative px-8 py-20 max-w-7xl mx-auto flex flex-col items-center text-center"
+        >
+            <div
+                class="absolute top-0 -z-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
+            ></div>
+            <div
+                class="absolute top-0 right-20 -z-10 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"
+            ></div>
 
-            <section class="destinations container" id="destinations">
-                <div class="grid-container">
-                    <article class="card">
-                        <img
-                            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Hồ nước trên núi"
-                            class="card-img"
-                        />
-                        <div class="card-content">
-                            <span class="card-tag">Núi & Hồ</span>
-                            <h3>Hồ Ngọc Bích, Canada</h3>
-                            <p>
-                                Hòa mình vào làn nước xanh ngọc bích phản chiếu
-                                dãy núi Rocky hùng vĩ. Một trải nghiệm chèo
-                                thuyền kayak không thể quên.
-                            </p>
-                            <a href="#" class="card-link">Xem chi tiết →</a>
-                        </div>
-                    </article>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                Xây dựng tương lai <br />
+                <span
+                    class="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
+                    >với giao diện tối giản.</span
+                >
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mb-10">
+                Trang web của bạn không chỉ cần chạy tốt, nó cần phải đẹp. Chúng
+                tôi cung cấp giải pháp thiết kế giúp nâng tầm thương hiệu của
+                bạn chỉ trong vài phút.
+            </p>
+            <div class="flex space-x-4">
+                <button
+                    class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform"
+                >
+                    Xem Demo
+                </button>
+                <button
+                    class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition"
+                >
+                    Tìm hiểu thêm
+                </button>
+            </div>
+        </section>
 
-                    <article class="card">
-                        <img
-                            src="https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Bãi biển nhiệt đới"
-                            class="card-img"
-                        />
-                        <div class="card-content">
-                            <span class="card-tag">Biển đảo</span>
-                            <h3>Quần đảo Maldives</h3>
-                            <p>
-                                Thiên đường hạ giới với những bãi cát trắng mịn
-                                và resort trên mặt nước. Nơi hoàn hảo để trốn
-                                chạy thực tại.
-                            </p>
-                            <a href="#" class="card-link">Xem chi tiết →</a>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <img
-                            src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Cắm trại trong rừng"
-                            class="card-img"
-                        />
-                        <div class="card-content">
-                            <span class="card-tag">Cắm trại</span>
-                            <h3>Rừng Đen, Đức</h3>
-                            <p>
-                                Thử thách bản thân với chuyến hiking xuyên rừng,
-                                cắm trại dưới bầu trời đầy sao và nghe tiếng
-                                suối chảy róc rách.
-                            </p>
-                            <a href="#" class="card-link">Xem chi tiết →</a>
-                        </div>
-                    </article>
+        <section class="px-8 py-20 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
+                >
+                    <div
+                        class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6"
+                    >
+                        <svg
+                            class="w-6 h-6 text-indigo-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Tốc độ cực nhanh</h3>
+                    <p class="text-slate-500">
+                        Tối ưu hóa mã nguồn giúp trang web của bạn tải trong
+                        chớp mắt.
+                    </p>
                 </div>
-            </section>
-        </main>
 
-        <footer>
-            <div class="container">
-                <h3>Wanderlust Travel</h3>
-                <p>
-                    © 2024 Bản quyền thuộc về Wanderlust. Thiết kế cho những tâm
-                    hồn tự do.
-                </p>
+                <div
+                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
+                >
+                    <div
+                        class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6"
+                    >
+                        <svg
+                            class="w-6 h-6 text-purple-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Bảo mật tuyệt đối</h3>
+                    <p class="text-slate-500">
+                        Hệ thống luôn được bảo vệ bởi các tiêu chuẩn an ninh mới
+                        nhất.
+                    </p>
+                </div>
+
+                <div
+                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
+                >
+                    <div
+                        class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6"
+                    >
+                        <svg
+                            class="w-6 h-6 text-blue-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Thiết kế sáng tạo</h3>
+                    <p class="text-slate-500">
+                        Màu sắc và bố cục được tính toán kỹ lưỡng để thu hút
+                        người dùng.
+                    </p>
+                </div>
             </div>
+        </section>
+
+        <footer
+            class="py-10 border-t border-slate-200 text-center text-slate-400 text-sm"
+        >
+            <p>© 2024 Gemini UI Design. Làm bởi sự tận tâm.</p>
         </footer>
     </body>
 </html>
