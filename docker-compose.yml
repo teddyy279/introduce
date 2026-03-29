@@ -4,7 +4,7 @@ services:
         image: ${DOCKER_USERNAME}/my-portfolio:${IMAGE_TAG}
         container_name: my-portfolio
         ports:
-            - "8080:80"
+            - "80:80"
         env_file:
             - .env
         restart: always
