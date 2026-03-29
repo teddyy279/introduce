@@ -1,177 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Giao diện Hiện đại - Gemini Design</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            body {
-                font-family: "Inter", sans-serif;
-            }
-            .glass {
-                background: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-        </style>
-    </head>
-    <body class="bg-slate-50 text-slate-900">
-        <nav
-            class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto"
-        >
-            <div
-                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
-            >
-                GEMINI.UI
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Phạm Bảo Khuê</title>
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--primary-color); }
+        p { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; }
+        .tag {
+            display: inline-block;
+            background: #1e293b;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 1px solid var(--primary-color);
+        }
+        .projects { margin-top: 2rem; text-align: left; }
+        .project-item { border-left: 3px solid var(--primary-color); padding-left: 15px; margin-bottom: 15px; }
+        footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phạm Bảo Khuê</h1>
+        <p>Sinh viên <strong>Học viện Công nghệ Bưu chính Viễn thông (PTIT)</strong></p>
+        <p>Web Developer | Cloud & DevOps Enthusiast</p>
+        
+        <div>
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Docker</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">GCP</span>
+        </div>
+
+        <div class="projects">
+            <h3>Dự án tiêu biểu:</h3>
+            <div class="project-item">
+                <strong>ThuVienPtit:</strong> Hệ thống quản lý thư viện thông minh.
             </div>
-            <div class="hidden md:flex space-x-8 font-medium text-slate-600">
-                <a href="#" class="hover:text-indigo-600 transition"
-                    >Trang chủ</a
-                >
-                <a href="#" class="hover:text-indigo-600 transition"
-                    >Tính năng</a
-                >
-                <a href="#" class="hover:text-indigo-600 transition"
-                    >Bảng giá</a
-                >
+            <div class="project-item">
+                <strong>S-Class:</strong> Nền tảng hỗ trợ học tập trực tuyến tương tự Classroom.
             </div>
-            <button
-                class="bg-indigo-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
-            >
-                Bắt đầu ngay
-            </button>
-        </nav>
-
-        <section
-            class="relative px-8 py-20 max-w-7xl mx-auto flex flex-col items-center text-center"
-        >
-            <div
-                class="absolute top-0 -z-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
-            ></div>
-            <div
-                class="absolute top-0 right-20 -z-10 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"
-            ></div>
-
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                Xây dựng tương lai <br />
-                <span
-                    class="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
-                    >với giao diện tối giản.</span
-                >
-            </h1>
-            <p class="text-lg text-slate-600 max-w-2xl mb-10">
-                Trang web của bạn không chỉ cần chạy tốt, nó cần phải đẹp. Chúng
-                tôi cung cấp giải pháp thiết kế giúp nâng tầm thương hiệu của
-                bạn chỉ trong vài phút.
-            </p>
-            <div class="flex space-x-4">
-                <button
-                    class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform"
-                >
-                    Xem Demo
-                </button>
-                <button
-                    class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition"
-                >
-                    Tìm hiểu thêm
-                </button>
+            <div class="project-item">
+                <strong>Identity Service:</strong> Dịch vụ xác thực bảo mật chuẩn OAuth2.
             </div>
-        </section>
+        </div>
 
-        <section class="px-8 py-20 max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div
-                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
-                >
-                    <div
-                        class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6"
-                    >
-                        <svg
-                            class="w-6 h-6 text-indigo-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Tốc độ cực nhanh</h3>
-                    <p class="text-slate-500">
-                        Tối ưu hóa mã nguồn giúp trang web của bạn tải trong
-                        chớp mắt.
-                    </p>
-                </div>
-
-                <div
-                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
-                >
-                    <div
-                        class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6"
-                    >
-                        <svg
-                            class="w-6 h-6 text-purple-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Bảo mật tuyệt đối</h3>
-                    <p class="text-slate-500">
-                        Hệ thống luôn được bảo vệ bởi các tiêu chuẩn an ninh mới
-                        nhất.
-                    </p>
-                </div>
-
-                <div
-                    class="p-8 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow"
-                >
-                    <div
-                        class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6"
-                    >
-                        <svg
-                            class="w-6 h-6 text-blue-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Thiết kế sáng tạo</h3>
-                    <p class="text-slate-500">
-                        Màu sắc và bố cục được tính toán kỹ lưỡng để thu hút
-                        người dùng.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <footer
-            class="py-10 border-t border-slate-200 text-center text-slate-400 text-sm"
-        >
-            <p>© 2024 Gemini UI Design. Làm bởi sự tận tâm...........</p>
+        <footer>
+            Dự án được triển khai tự động qua CI/CD Pipeline trên Google Cloud Platform.
+            <br>Hà Nội – 2026
         </footer>
-    </body>
+    </div>
+</body>
 </html>
